@@ -1,0 +1,70 @@
+{% comment %}
+Total Count: <strong>{{ totalCount }}</strong>
+Current Page: <strong>{{ currentPage }}</strong>
+Board List: <strong>{{ boardList | length }}</strong>
+{% endcomment %}
+
+<table cellspacing=1 width=700 border=0>
+	<tr>
+		<td>Total items: {{ totalCount }}</td>
+		<td><p align=right>Page: {{ currentPage }}</p></td>
+	</tr>
+</table>
+
+<table cellspacing=1 width=700 border=1>
+	<tr>
+		<td width=50><p align=center>ID</p></td>
+		<td width=100><p align=center>Name</p></td>
+		<td width=320><p align=center>Title</p></td>
+		<td width=100><p align=center>Date</p></td>
+		<td width=100><p align=center>Hits</p></td>
+	</tr>
+
+	{% if boardList %}
+	<ul>
+		{% for row in boardList %}
+		<tr>
+			<td width=50><p align=center>{{ row.id }}</p></td>
+			<td width=100><p align=center>{{ row.name }}</p></td>
+			<td width=320>
+				<p align=center>
+					<a href="/viewWork?memoId={{ row.id }}&currentPage={{ currentPage }}" title="{{ row.title }}">{{ row.title }}</a>
+				</p>
+			</td>
+			<td width=100><p align=center>{{ row.created_date }}</p></td>
+			<td width=100><p align=center>{{ row.hits }}</p></td>
+		</tr>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>No Items</p>
+	{% endif %}
+</table>
+
+<table cellspacing=1 width=700 border=1>
+	<tr>
+		<td>
+			{% for page in totalPageList %}
+			<a href="/page_work?currentPage={{ page }}">
+				[
+				{% ifequal page currentPage %}
+				<b>
+				{% endifequal %}
+				{{ page }}
+				{% ifequal page currentPage %}
+				</b>
+				{% endifequal %}
+				]
+			</a>
+			{% endfor %}
+		</td>
+	</tr>
+</table>
+
+<table width=700>
+	<tr>
+		<td>
+			<input type=button value="Write" onClick="window.location='/write_form'">
+		</td>
+	</tr>
+</table>

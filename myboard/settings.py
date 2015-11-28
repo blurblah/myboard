@@ -56,7 +56,7 @@ ROOT_URLCONF = 'myboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['sample_board/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
